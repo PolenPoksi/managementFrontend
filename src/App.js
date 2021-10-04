@@ -8,9 +8,17 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 function App() {
   return (
-    <div className="container">
-      <h3 className="m-3 d-flex justify-content-center">teri veri</h3>
-    </div>
+    <BrowserRouter>
+      <div className="container">
+        <h3 className="m-3 d-flex justify-content-center">Managment App</h3>
+        <Navigation />
+        <Switch>
+          <Route path="/" component={Home} exact />
+          <Route path="/department" component={Department} />
+          <Route path="/employee" component={Employee} />
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 
