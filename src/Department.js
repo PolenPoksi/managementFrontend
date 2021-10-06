@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import { Table } from "react-bootstrap";
+import { ButtonToolbar, Table } from "react-bootstrap";
+import { AddDepModal } from "./AddDepModal";
+import { Button } from "react-bootstrap";
 
 export class Department extends Component {
   constructor(props) {
     super(props);
-    this.state = { deps: [] };
+    this.state = { deps: [], addModalShow: false };
   }
 
   refreshList() {
@@ -24,13 +26,16 @@ export class Department extends Component {
 
   render() {
     const { deps } = this.state;
+    let addModalClose = () => this.setState({ addModalShow: false });
     return (
       <div>
         <Table className="mt-4" striped bordered hover size="sm">
           <thead>
-            <tr>DepartmentId</tr>
-            <tr>DepartmentName</tr>
-            <tr>Options</tr>
+            <tr>
+              <th>DepartmentId</th>
+              <th>DepartmentName</th>
+              <th>Options</th>
+            </tr>
           </thead>
           <tbody>
             {deps.map((dep) => (
@@ -42,6 +47,16 @@ export class Department extends Component {
             ))}
           </tbody>
         </Table>
+
+        <ButtonToolbar>
+          <Button
+            variant="primary"
+            onClick={() => this.setState({ addModalShow: true })}
+          >
+            Add Department
+          </Button>
+          <AddDepModal show={this.state.addModalShow} onHide={addModalClose} />
+        </ButtonToolbar>
       </div>
     );
   }
